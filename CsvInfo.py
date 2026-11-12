@@ -6,3 +6,4 @@ def printInfo(df:pd.DataFrame):
     print(df.describe())
     print(df.isnull().sum())
     print(df.columns.tolist())
+    print("hello")
