@@ -38,6 +38,6 @@ def dataPreprocessing(df:pd.DataFrame):
     numeric_transformer = Pipeline([("imputer", SimpleImputer(strategy="median")), ("scaler", StandardScaler())])
     categorical_transformer = Pipeline([("imputer", SimpleImputer(strategy="most_frequent")),("encoder", OneHotEncoder(handle_unknown="ignore"))])
     preprocessor = ColumnTransformer([("num", numeric_transformer, numeric_features), ("cat", categorical_transformer, categorical_features)])
-    print("데이터 전처리 완료")
+    print("데이터 전처리 완료\n\n")
     
     return preprocessor, X_train, X_test, y_train, y_test

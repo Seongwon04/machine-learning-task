@@ -9,6 +9,7 @@ from sklearn.metrics import f1_score
 from sklearn.metrics import log_loss
 from sklearn.metrics import classification_report
 from Evaluatemodel import evaluate_model
+from CrossValidate import crossValidate
 
 def modelComparison(logistic_model, sgd_model, tree_model, rf_model, gb_model, X_test, y_test):
     # 모델 목록 구성
@@ -26,7 +27,8 @@ def modelComparison(logistic_model, sgd_model, tree_model, rf_model, gb_model, X
         result = evaluate_model(name, model, X_test, y_test)
         results.append(result)
         result_df = pd.DataFrame(results)
-    
+
+    print("\n모델 평가")
     print(result_df.round(4))
 
     # 모델별 성능 시각화
@@ -41,5 +43,30 @@ def modelComparison(logistic_model, sgd_model, tree_model, rf_model, gb_model, X
     plt.ylim(0, 1)
     plt.xticks(rotation=30)
     plt.legend(loc="lower right")
+    plt.tight_layout()
+    plt.show()
+
+
+    # 교차검증 평가 실행
+    cv_results = []
+    for name, model in models.items():
+        cv_result = crossValidate(name, model, X_test, y_test)
+        cv_results.append(cv_result)
+        cv_result_df = pd.DataFrame(cv_results)
+
+    print("\n교차검증 모델 평가")
+    print(cv_result_df.round(4))
+
+    # 교차검증 평가 시각화
+    cv_result_df.set_index("Model")[
+    ["Accuracy", "Precision", "Recall", "F1"]
+    ].plot(
+        kind="bar",
+        figsize=(12, 6)
+    )
+    plt.title("5-Fold Cross Validation")
+    plt.ylabel("Score")
+    plt.ylim(0, 1)
+    plt.xticks(rotation=30)
     plt.tight_layout()
     plt.show()
