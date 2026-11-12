@@ -6,6 +6,7 @@ from DataPreprocessing import dataPreprocessing
 from LogisticRegression import logisticRegression
 from SGD import SGDModel
 from DecisionTree import decisionTree
+from RandomForest import randomForest
 
 def main():
     df = readCsv()
@@ -16,11 +17,9 @@ def main():
     """
     logistic_pred = logisticRegression(preprocessor, X_train, X_test, y_train, y_test)    
     ssg_pred = SGDModel(preprocessor, X_train, X_test, y_train, y_test)    
-    print("logistic_pred : \n", logistic_pred)
-    print("ssg_pred : \n", ssg_pred)
     """
-    decisionTree(preprocessor, X_train, X_test, y_train, y_test)
-    print("hello")
+    #decisionTree(preprocessor, X_train, X_test, y_train, y_test)
+    randomForest(preprocessor, X_train, X_test, y_train, y_test)
     
 if __name__ == "__main__":
     main()
