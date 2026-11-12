@@ -23,14 +23,4 @@ def randomForest(preprocessor:ColumnTransformer, X_train:pd.DataFrame, X_test:pd
     rf_model.fit(X_train,y_train)
     print("랜덤 포레스트 학습 완료")
 
-    # 예측
-    rf_pred = rf_model.predict(X_test)
-
-    # 모델 평가
-    print("Accuracy : ", accuracy_score(y_test, rf_pred))
-    print("Precision : ", precision_score(y_test, rf_pred))
-    print("Recall : ", recall_score(y_test, rf_pred))
-    print("F1-score : ", f1_score(y_test, rf_pred))
-    print("Log Loss : ", log_loss(y_test, rf_pred))
-    result = classification_report(y_test, rf_pred)
-    return result
+    return rf_model

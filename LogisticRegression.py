@@ -16,15 +16,4 @@ def logisticRegression(preprocessor:ColumnTransformer, X_train:pd.DataFrame, X_t
     logistic_model.fit(X_train, y_train)
     print("로지스틱 회귀 학습 완료")
 
-    # 예측
-    pred = logistic_model.predict(X_test)
-    print("예측 결과 : ", pred[:20])
-    print("실제 결과 : ", y_test.values[:20])
-    # 모델 평가
-    print("Accuracy : ", accuracy_score(y_test, pred))
-    print("Precision : ", precision_score(y_test, pred))
-    print("Recall : ", recall_score(y_test, pred))
-    print("F1-score : ", f1_score(y_test, pred))
-    print("Log Loss : ", log_loss(y_test, pred))
-    result = classification_report(y_test, pred)
-    return result
+    return logistic_model

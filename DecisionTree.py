@@ -11,6 +11,12 @@ from sklearn.metrics import classification_report
 def decisionTree(preprocessor:ColumnTransformer, X_train:pd.DataFrame, X_test:pd.DataFrame, y_train:pd.DataFrame, y_test:pd.DataFrame):
     tree_model = Pipeline([("preprocessor", preprocessor), ("model", DecisionTreeClassifier(random_state=42))])
     tree_model.fit(X_train, y_train)
+
+    return tree_model
+
+
+
+
     tree_pred = tree_model.predict(X_test)
     print("Decision Tree Accuracy : ", accuracy_score(y_test, tree_pred))
     print("Decision Tree Recall : ", recall_score(y_test, tree_pred))
