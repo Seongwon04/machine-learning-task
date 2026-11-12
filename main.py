@@ -20,5 +20,7 @@ def main():
     print("ssg_pred : \n", ssg_pred)
     """
     decisionTree(preprocessor, X_train, X_test, y_train, y_test)
+    print("hello")
+    
 if __name__ == "__main__":
     main()
