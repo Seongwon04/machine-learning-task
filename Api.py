@@ -33,11 +33,11 @@ def home():
 
 @app.post("/analyze/all")
 def analyzeAll():
-    logistic_model = logisticRegression(preprocessor, X_train, X_test, y_train, y_test)    
-    sgd_model = SGDModel(preprocessor, X_train, X_test, y_train, y_test)    
-    decisionTree_model = decisionTree(preprocessor, X_train, X_test, y_train, y_test)
+    logistic_model = logisticRegression(preprocessor, X_train, y_train, {"C": 0.1})    
+    sgd_model = SGDModel(preprocessor, X_train, y_train, {"alpha": 0.001})    
+    decisionTree_model = decisionTree(preprocessor, X_train, y_train, {"max_depth": 5})
     randomForest_model = randomForest(preprocessor, X_train, y_train, {"n_estimators": 200})
-    gb_model = gradientBoosting(preprocessor, X_train, X_test, y_train, y_test)
+    gb_model = gradientBoosting(preprocessor, X_train, y_train, {"learning_rate": 0.1})
 
     result = modelComparison(logistic_model, sgd_model, decisionTree_model, randomForest_model, gb_model, 
                              X_test, y_test, X_train, y_train)
@@ -48,9 +48,9 @@ def analyzeAll():
 
 @app.post("/analyze")
 def analyze(data: Model):
-    print("요청 모델:", data.name)
-    print("요청 파라미터:", data.parameters)
-    print("파라미터 타입:", type(data.parameters.get("n_estimators")))
+    # print("요청 모델:", data.name)
+    # print("요청 파라미터:", data.parameters)
+    # print("파라미터 타입:", type(data.parameters.get("n_estimators")))
 
     if data.name == "RandomForest":
         # 모델 생성, 학습
