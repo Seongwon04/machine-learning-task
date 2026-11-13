@@ -12,10 +12,12 @@ from sklearn.ensemble import RandomForestClassifier
 def randomForest(preprocessor:ColumnTransformer, X_train:pd.DataFrame, X_test:pd.DataFrame, y_train:pd.DataFrame, y_test:pd.DataFrame):
     # 모델 생성
     rf_model = Pipeline([("preprocessor", preprocessor),("model", RandomForestClassifier(
-        n_estimators=100,
-        max_depth=7,
+        n_estimators=200,
+        max_depth=10,
         random_state=42,
-        n_jobs=-1
+        n_jobs=-1,
+        min_samples_leaf=2,
+        min_samples_split=5
         ))
     ])
 
