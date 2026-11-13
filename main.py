@@ -26,11 +26,11 @@ def main():
     logistic_model = logisticRegression(preprocessor, X_train, X_test, y_train, y_test)    
     sgd_model = SGDModel(preprocessor, X_train, X_test, y_train, y_test)    
     decisionTree_model = decisionTree(preprocessor, X_train, X_test, y_train, y_test)
-    randomForest_model = randomForest(preprocessor, X_train, X_test, y_train, y_test)
+    randomForest_model = randomForest(preprocessor, X_train, y_train, {"n_estimators": 200})
     gb_model = gradientBoosting(preprocessor, X_train, X_test, y_train, y_test)
 
     # 모델 비교
-    #modelComparison(logistic_model, sgd_model, decisionTree_model, randomForest_model, gb_model, X_test, y_test)
+    #modelComparison(logistic_model, sgd_model, decisionTree_model, randomForest_model, gb_model, X_test, y_test, X_train, y_train)
 
     # 최적 모델 찾기
     #gridSearchCV(preprocessor, X_train, X_test, y_train, y_test)

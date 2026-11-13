@@ -8,11 +8,12 @@ from sklearn.metrics import f1_score
 from sklearn.metrics import log_loss
 from sklearn.metrics import classification_report
 from sklearn.ensemble import RandomForestClassifier
+from typing import Any
 
-def randomForest(preprocessor:ColumnTransformer, X_train:pd.DataFrame, X_test:pd.DataFrame, y_train:pd.DataFrame, y_test:pd.DataFrame):
+def randomForest(preprocessor:ColumnTransformer, X_train:pd.DataFrame, y_train:pd.DataFrame, parameters:dict[str, Any]):
     # 모델 생성
     rf_model = Pipeline([("preprocessor", preprocessor),("model", RandomForestClassifier(
-        n_estimators=200,
+        n_estimators=parameters["n_estimators"],
         max_depth=10,
         random_state=42,
         n_jobs=-1,
